@@ -31,12 +31,6 @@
 },
 {
   "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
-  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\NikiScriptCWrapper.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\NikiScriptCWrapper.cpp\"",
-  "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\NikiScriptCWrapper.cpp",
-  "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\NikiScriptCWrapper.cpp.obj"
-},
-{
-  "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\Parser.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\Parser.cpp\"",
   "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\Parser.cpp",
   "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\Parser.cpp.obj"
@@ -46,6 +40,12 @@
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\PrintCallback.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\PrintCallback.cpp\"",
   "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\PrintCallback.cpp",
   "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\PrintCallback.cpp.obj"
+},
+{
+  "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\PrintCallbackWrapper.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\PrintCallbackWrapper.cpp\"",
+  "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\PrintCallbackWrapper.cpp",
+  "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\PrintCallbackWrapper.cpp.obj"
 },
 {
   "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",

@@ -20,7 +20,7 @@ void ns_setPrintCallback(void* pData, ns_PrintCallback callback) {
 	ns::setPrintCallback(pData, proxyCallback);
 }
 
-void ns_Print(ns_PrintLevel level, const char* message) {
+void ns_print(ns_PrintLevel level, const char* message) {
     ns::print(static_cast<ns::PrintLevel>(level), message);
 }
 

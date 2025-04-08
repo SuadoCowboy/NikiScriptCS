@@ -22,7 +22,7 @@ typedef void(*ns_PrintCallback)(void* pData, ns_PrintLevel level, const char* me
 NIKIAPI void ns_setPrintCallback(void* pData, ns_PrintCallback callback);
 
 // wraps ns::print
-NIKIAPI void ns_Print(ns_PrintLevel level, const char* message);
+NIKIAPI void ns_print(ns_PrintLevel level, const char* message);
 
 // ns::printUnknownCommand
 NIKIAPI void ns_printUnknownCommand(const char* command);
