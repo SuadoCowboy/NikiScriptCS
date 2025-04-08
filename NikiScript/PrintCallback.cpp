@@ -24,7 +24,7 @@ void ns::setPrintCallback(void* pData, PrintCallback callback) {
 	pPrintCallbackData = pData;
 }
 
-void ns::print(const ns::PrintLevel &level, const std::string& str) {
+void ns::print(ns::PrintLevel level, const std::string& str) {
 	printCallback(pPrintCallbackData, level, str);
 }
 
