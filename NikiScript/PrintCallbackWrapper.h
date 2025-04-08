@@ -1,8 +1,8 @@
 #pragma once
 
-#include <stdint.h>
+#include "DLLExport.h"
 
-#define NIKIAPI __declspec(dllexport)
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {

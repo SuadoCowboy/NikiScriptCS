@@ -1,4 +1,4 @@
-#include "NikiScriptCWrapper.h"
+#include "PrintCallbackWrapper.h"
 
 #include <string>
 #include <cstdio>
