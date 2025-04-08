@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace NikiScript
+public static partial class NikiScript
 {
 	internal static class Token
 	{

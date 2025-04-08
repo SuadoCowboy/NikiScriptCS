@@ -1,49 +1,42 @@
-﻿using NikiScript;
+﻿using static NikiScript;
 
 class Program
 {
-    static private readonly _Print.CallbackDelegate _callback = new _Print.CallbackDelegate(PrintHandler);
+	// static private readonly _Print.CallbackDelegate _callback = new _Print.CallbackDelegate(PrintHandler);
 
-    static void Main()
-    {
-        // Pass context with GCHandle?
-        _Print.SetPrintCallback(IntPtr.Zero, _callback);
+	static void Main()
+	{
+		// Pass context with GCHandle?
+		SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
 
-        _Print.Print(_Print.Level.WARNING, "This is a warning from C#!\n");
-        _Print.PrintUnknownCommand("echo_blazulite");
+		Print(Level.WARNING, "This is a warning from C#!\n");
+		PrintUnknownCommand("echo_blazulite");
 
-		for (_Print.Level i = _Print.Level.DEFAULT; i != _Print.Level.ERROR+1; ++i)
-			_Print.Print(i, $"PrintLevel as string: {_Print.LevelToString(i)}\n");
-
-		nint pToken = Token.NewToken((byte)Token.Type.END, "Test blazulover");
-
-		_Print.Print(_Print.Level.ECHO, $"{Token.GetTokenType(pToken)}\n");
-		_Print.Print(_Print.Level.ECHO, $"{Token.GetTokenValue(pToken)}\n");
-
-		Token.DeleteToken(pToken);
+		for (Level i = Level.DEFAULT; i != Level.ERROR+1; ++i)
+			Print(i, $"PrintLevel as string: {LevelToString(i)}\n");
 	}
 
-    static void PrintHandler(IntPtr pData, _Print.Level level, string message)
-    {
+	static void PrintHandler(IntPtr pData, Level level, string message)
+	{
 		switch (level) {
-		case _Print.Level.DEFAULT:
+		case Level.DEFAULT:
 			Console.ForegroundColor = ConsoleColor.White;
 			break;
 
-		case _Print.Level.ECHO:
+		case Level.ECHO:
 			Console.ForegroundColor = ConsoleColor.Blue;
 			break;
 
-		case _Print.Level.WARNING:
+		case Level.WARNING:
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			break;
 
-		case _Print.Level.ERROR:
+		case Level.ERROR:
 			Console.ForegroundColor = ConsoleColor.Red;
 			break;
 		}
 
-        Console.Write(message);
+		Console.Write(message);
 		Console.ResetColor();
-    }
+	}
 }
