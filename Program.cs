@@ -1,18 +1,20 @@
-﻿class Program
+﻿using static NikiScript;
+
+class Program
 {
-    static private readonly NikiScript.PrintCallbackDelegate _callback = new NikiScript.PrintCallbackDelegate(PrintHandler);
+    static private readonly PrintCallbackDelegate _callback = new PrintCallbackDelegate(PrintHandler);
 
     static void Main()
     {
         // Optional: Pass context with GCHandle
-        NikiScript.SetPrintCallback(IntPtr.Zero, _callback);
+        SetPrintCallback(IntPtr.Zero, _callback);
 
         // Test it!
-        NikiScript.Print(PrintLevel.WARNING, "This is a warning from C#!\n");
-        NikiScript.PrintUnknownCommand("echo_blazulite");
+        Print(PrintLevel.WARNING, "This is a warning from C#!\n");
+        PrintUnknownCommand("echo_blazulite");
 
 		for (PrintLevel i = PrintLevel.DEFAULT; i != PrintLevel.ERROR+1; ++i)
-			NikiScript.Print(i, $"PrintLevel as string: {NikiScript.PrintLevelToString(i)}\n");
+			Print(i, $"PrintLevel as string: {PrintLevelToString(i)}\n");
 	}
 
     static void PrintHandler(IntPtr pData, PrintLevel level, string message)
