@@ -11,7 +11,7 @@
         NikiScript.Print(PrintLevel.WARNING, "This is a warning from C#!\n");
         NikiScript.PrintUnknownCommand("echo_blazulite");
 
-        NikiScript.Print(PrintLevel.ECHO, "Level as string: " + NikiScript.PrintLevelToString(PrintLevel.ECHO));
+        NikiScript.Print(PrintLevel.ECHO, "Level as string: " + NikiScript.PrintLevelToString(PrintLevel.ECHO) + "\n");
 	}
 
     static void PrintHandler(IntPtr pData, PrintLevel level, string message)
@@ -34,7 +34,7 @@
 			break;
 		}
 
-        Console.WriteLine(message);
+        Console.Write(message);
 		Console.ResetColor();
     }
 }
