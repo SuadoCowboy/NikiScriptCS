@@ -22,7 +22,7 @@ namespace ns {
 
 	template<typename... Args>
 	void printf(PrintLevel level, const char* format, Args ... args) {
-		print(level, formatString(format, args...));
+		print(level, formatString(format, args...).c_str());
 	}
 
 	void setPrintCallback(void* pData, PrintCallback callback);

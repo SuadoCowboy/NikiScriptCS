@@ -72,5 +72,5 @@ void ns::Command::printAsDataTree() {
 	}
 	usage << '\n' << descriptions.str();
 
-	ns::print(PrintLevel::ECHO, usage.str());
+	ns::print(PrintLevel::ECHO, usage.str().c_str());
 }

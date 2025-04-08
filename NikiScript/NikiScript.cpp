@@ -12,7 +12,7 @@ void ns::help_command(Context& ctx) {
 		for (auto& command : ctx.commands.commands)
 			oss << command.second.name << ' ' << command.second.getArgumentsNames() << '\n';
 
-		ns::print(ns::ECHO, oss.str());
+		ns::print(ns::ECHO, oss.str().c_str());
 
 	} else {
 		std::string& commandName = ctx.args.getString(0);
