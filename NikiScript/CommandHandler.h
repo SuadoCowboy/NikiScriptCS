@@ -3,13 +3,12 @@
 #include <unordered_map>
 #include <string>
 
-#include "DLLExport.h"
 #include "Command.h"
 
 namespace ns {
 	struct Context;
 
-	struct NIKIAPI CommandHandler {
+	struct CommandHandler {
 		std::unordered_map<std::string, Command> commands;
 
 		Command* get(const std::string& name);

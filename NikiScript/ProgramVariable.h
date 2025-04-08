@@ -4,8 +4,6 @@
 #include <sstream>
 #include <unordered_map>
 
-#include "DLLExport.h"
-
 namespace ns {
 	struct ProgramVariable;
 	struct Context;
@@ -15,7 +13,7 @@ namespace ns {
 	
 	struct Context;
 
-	struct NIKIAPI ProgramVariable {
+	struct ProgramVariable {
 		void* pValue = nullptr;
 		std::string description;
 
@@ -28,8 +26,8 @@ namespace ns {
 
 	typedef std::unordered_map<std::string, ProgramVariable> ProgramVariables;
 
-	NIKIAPI std::string getString(Context&, ProgramVariable* pVar);
-	NIKIAPI void setString(Context&, ProgramVariable* pVar, const std::string& str);
+	std::string getString(Context&, ProgramVariable* pVar);
+	void setString(Context&, ProgramVariable* pVar, const std::string& str);
 
 	template<typename T>
 	std::string getNumber(Context&, ProgramVariable* pVar) {
@@ -55,15 +53,15 @@ namespace ns {
 	}
 	#endif
 
-	NIKIAPI void setUnsignedLongLong(Context&, ProgramVariable* pVar, const std::string& str);
+	void setUnsignedLongLong(Context&, ProgramVariable* pVar, const std::string& str);
 
-	NIKIAPI void setFloat(Context&, ProgramVariable* pVar, const std::string& str);
-	NIKIAPI void setDouble(Context&, ProgramVariable* pVar, const std::string& str);
-	NIKIAPI void setLongDouble(Context&, ProgramVariable* pVar, const std::string& str);
+	void setFloat(Context&, ProgramVariable* pVar, const std::string& str);
+	void setDouble(Context&, ProgramVariable* pVar, const std::string& str);
+	void setLongDouble(Context&, ProgramVariable* pVar, const std::string& str);
 
-	NIKIAPI void setChar(Context&, ProgramVariable* pVar, const std::string& str);
-	NIKIAPI void setShort(Context&, ProgramVariable* pVar, const std::string& str);
-	NIKIAPI void setInteger(Context&, ProgramVariable* pVar, const std::string& str);
-	NIKIAPI void setLong(Context&, ProgramVariable* pVar, const std::string& str);
-	NIKIAPI void setLongLong(Context&, ProgramVariable* pVar, const std::string& str);
+	void setChar(Context&, ProgramVariable* pVar, const std::string& str);
+	void setShort(Context&, ProgramVariable* pVar, const std::string& str);
+	void setInteger(Context&, ProgramVariable* pVar, const std::string& str);
+	void setLong(Context&, ProgramVariable* pVar, const std::string& str);
+	void setLongLong(Context&, ProgramVariable* pVar, const std::string& str);
 }

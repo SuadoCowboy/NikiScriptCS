@@ -3,14 +3,12 @@
 #include <vector>
 #include <string>
 
-#include "DLLExport.h"
-
 namespace ns {
 	struct Context;
 
 	typedef void(*CommandCallback)(Context& ctx);
 
-	struct NIKIAPI Command {
+	struct Command {
 		std::string name;
 		unsigned char minArgs = 0, maxArgs = 0;
 		CommandCallback callback = nullptr;

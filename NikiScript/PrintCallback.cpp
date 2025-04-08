@@ -24,10 +24,10 @@ void ns::setPrintCallback(void* pData, PrintCallback callback) {
 	pPrintCallbackData = pData;
 }
 
-void ns::print(ns::PrintLevel level, const std::string& str) {
+void ns::print(ns::PrintLevel level, const char* str) {
 	printCallback(pPrintCallbackData, level, str);
 }
 
-void ns::printUnknownCommand(const std::string& command) {
+void ns::printUnknownCommand(const char* command) {
 	printf(PrintLevel::ERROR, "Unknown command \"{}\"\n", command);
 }
