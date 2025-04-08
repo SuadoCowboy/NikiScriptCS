@@ -1,38 +1,44 @@
-﻿using static NikiScript;
+﻿using NikiScript;
 
 class Program
 {
-    static private readonly PrintCallbackDelegate _callback = new PrintCallbackDelegate(PrintHandler);
+    static private readonly _Print.CallbackDelegate _callback = new _Print.CallbackDelegate(PrintHandler);
 
     static void Main()
     {
-        // Optional: Pass context with GCHandle
-        SetPrintCallback(IntPtr.Zero, _callback);
+        // Pass context with GCHandle?
+        _Print.SetPrintCallback(IntPtr.Zero, _callback);
 
-        // Test it!
-        Print(PrintLevel.WARNING, "This is a warning from C#!\n");
-        PrintUnknownCommand("echo_blazulite");
+        _Print.Print(_Print.Level.WARNING, "This is a warning from C#!\n");
+        _Print.PrintUnknownCommand("echo_blazulite");
 
-		for (PrintLevel i = PrintLevel.DEFAULT; i != PrintLevel.ERROR+1; ++i)
-			Print(i, $"PrintLevel as string: {PrintLevelToString(i)}\n");
+		for (_Print.Level i = _Print.Level.DEFAULT; i != _Print.Level.ERROR+1; ++i)
+			_Print.Print(i, $"PrintLevel as string: {_Print.LevelToString(i)}\n");
+
+		nint pToken = Token.NewToken((byte)Token.Type.END, "Test blazulover");
+
+		_Print.Print(_Print.Level.ECHO, $"{Token.GetTokenType(pToken)}\n");
+		_Print.Print(_Print.Level.ECHO, $"{Token.GetTokenValue(pToken)}\n");
+
+		Token.DeleteToken(pToken);
 	}
 
-    static void PrintHandler(IntPtr pData, PrintLevel level, string message)
+    static void PrintHandler(IntPtr pData, _Print.Level level, string message)
     {
 		switch (level) {
-		case PrintLevel.DEFAULT:
+		case _Print.Level.DEFAULT:
 			Console.ForegroundColor = ConsoleColor.White;
 			break;
 
-		case PrintLevel.ECHO:
+		case _Print.Level.ECHO:
 			Console.ForegroundColor = ConsoleColor.Blue;
 			break;
 
-		case PrintLevel.WARNING:
+		case _Print.Level.WARNING:
 			Console.ForegroundColor = ConsoleColor.Yellow;
 			break;
 
-		case PrintLevel.ERROR:
+		case _Print.Level.ERROR:
 			Console.ForegroundColor = ConsoleColor.Red;
 			break;
 		}

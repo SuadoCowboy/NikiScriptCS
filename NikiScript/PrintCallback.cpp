@@ -3,20 +3,19 @@
 ns::PrintCallback ns::printCallback = nullptr;
 void* ns::pPrintCallbackData = nullptr;
 
-std::string ns::printLevelToString(PrintLevel level) {
+const char* ns::levelToString(PrintLevel level) {
 	switch (level) {
-	case PrintLevel::DEFAULT:
-		return std::string("DEFAULT");
-	case PrintLevel::ECHO:
-		return std::string("ECHO");
-	case PrintLevel::WARNING:
-		return std::string("WARNING");
-	case PrintLevel::ERROR:
-		return std::string("ERROR");
-	default:
-		return std::string("UNKNOWN");
-	}
-
+		case PrintLevel::DEFAULT:
+			return "DEFAULT";
+		case PrintLevel::ECHO:
+			return "ECHO";
+		case PrintLevel::WARNING:
+			return "WARNING";
+		case PrintLevel::ERROR:
+			return "ERROR";
+		default:
+			return "UNKNOWN";
+		}
 }
 
 void ns::setPrintCallback(void* pData, PrintCallback callback) {

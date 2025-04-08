@@ -11,7 +11,7 @@
 #include <Parser.h>
 
 void nikiScriptPrintCallback(void*, ns::PrintLevel level, const std::string& msg) {
-	std::cout << ns::printLevelToString(level) << ": " << msg;
+	std::cout << ns::levelToString(level) << ": " << msg;
 }
 
 std::string tokenTypeToString(const ns::TokenType& type) {

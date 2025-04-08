@@ -1,35 +1,23 @@
 #pragma once
 
 #include "DLLExport.h"
+#include "PrintCallback.h"
 
 #include <stdint.h>
 
-#ifdef __cplusplus
+typedef ns::PrintLevel ns_PrintLevel;
+typedef ns::PrintCallback ns_PrintCallback;
+
 extern "C" {
-#endif
+	// ns::setPrintCallback
+	NIKIAPI void ns_setPrintCallback(void* pData, ns_PrintCallback callback);
 
-// Match the PrintLevel enum
-typedef enum ns_PrintLevel {
-    PrintLevel_DEFAULT = 0,
-    PrintLevel_ECHO,
-    PrintLevel_WARNING,
-    PrintLevel_ERROR
-} ns_PrintLevel;
+	// wraps ns::print
+	NIKIAPI void ns_print(ns_PrintLevel level, const char* message);
 
-typedef void(*ns_PrintCallback)(void* pData, ns_PrintLevel level, const char* message);
+	// ns::printUnknownCommand
+	NIKIAPI void ns_printUnknownCommand(const char* command);
 
-// ns::setPrintCallback
-NIKIAPI void ns_setPrintCallback(void* pData, ns_PrintCallback callback);
-
-// wraps ns::print
-NIKIAPI void ns_print(ns_PrintLevel level, const char* message);
-
-// ns::printUnknownCommand
-NIKIAPI void ns_printUnknownCommand(const char* command);
-
-// ns::printLevelToString
-NIKIAPI const char* ns_printLevelToString(ns_PrintLevel level);
-
-#ifdef __cplusplus
+	// ns::printLevelToString
+	NIKIAPI const char* ns_levelToString(ns_PrintLevel level);
 }
-#endif

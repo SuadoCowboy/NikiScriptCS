@@ -61,6 +61,12 @@
 },
 {
   "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\TokenWrapper.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\TokenWrapper.cpp\"",
+  "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\TokenWrapper.cpp",
+  "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\TokenWrapper.cpp.obj"
+},
+{
+  "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\Utils.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\Utils.cpp\"",
   "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\Utils.cpp",
   "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\Utils.cpp.obj"

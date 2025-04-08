@@ -13,7 +13,7 @@ namespace ns {
 		ERROR, ///< anything that went wrong and can not continue
 	};
 
-	std::string printLevelToString(PrintLevel level);
+	const char* levelToString(PrintLevel level);
 
 	typedef void(*PrintCallback)(void* pData, PrintLevel level, const char* message);
 
