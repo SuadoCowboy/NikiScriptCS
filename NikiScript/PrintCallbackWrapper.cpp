@@ -1,8 +1,5 @@
 #include "PrintCallbackWrapper.h"
 
-#include <string>
-#include <cstdio>
-
 void ns_setPrintCallback(void* pData, ns_PrintCallback callback) {
 	ns::setPrintCallback(pData, callback);
 }
