@@ -76,10 +76,10 @@ void ns_CommandSetArgsDescriptions(ns_Command* pCommand, const char* argsDescrip
 		pCommand->argsDescriptions[i] = argsDescriptions[i];
 }
 
-char* ns_CommandAllocGetArgDescription(ns_Command* pCommand, uint16_t index) {
-	return ns::allocStringToCharArray(pCommand->argsDescriptions[index]);
-}
-
 uint16_t ns_CommandGetArgsDescriptionsSize(ns_Command* pCommand) {
 	return pCommand->argsDescriptions.size();
+}
+
+char* ns_CommandAllocGetArgDescription(ns_Command* pCommand, uint16_t index) {
+	return ns::allocStringToCharArray(pCommand->argsDescriptions[index]);
 }
