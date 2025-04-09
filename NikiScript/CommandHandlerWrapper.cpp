@@ -20,8 +20,8 @@ const char* ns_CommandHandlerGetCommandsNames(ns_CommandHandler *pCommand) {
 	std::string names = "";
 	for (auto it = pCommand->commands.begin(); it != pCommand->commands.end(); ++it)
 		names += it->first + " ";
-
 	names.erase(names.size()-1);
+
 	return ns::allocStringToCharArray(names);
 }
 
@@ -33,8 +33,11 @@ ns_Command* ns_CommandHandlerGetCommand(ns_CommandHandler *pCommandHandler, cons
 		return &it->second;
 }
 
-bool ns_CommandHandlerAdd(ns_CommandHandler *pCommandHandler, const ns_Command *pCommand) {
-	return pCommandHandler->add(*pCommand);
+ns_Command* ns_CommandHandlerAdd(ns_CommandHandler *pCommandHandler, const ns_Command *pCommand) {
+	if (pCommandHandler->add(*pCommand))
+		return &pCommandHandler->commands[pCommand->name];
+	else
+		return nullptr;
 }
 
 void ns_CommandHandlerErase(ns_CommandHandler *pCommandHandler, const char *name) {
