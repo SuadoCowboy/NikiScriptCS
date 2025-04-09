@@ -3,8 +3,6 @@
 #include "DLLExport.h"
 #include "PrintCallback.h"
 
-#include <stdint.h>
-
 typedef ns::PrintLevel ns_PrintLevel;
 typedef ns::PrintCallback ns_PrintCallback;
 
