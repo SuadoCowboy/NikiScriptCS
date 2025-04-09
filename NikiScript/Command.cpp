@@ -7,7 +7,7 @@
 
 ns::Command::Command() {}
 
-ns::Command::Command(const std::string& name, unsigned char minArgs, unsigned char maxArgs,
+ns::Command::Command(const std::string& name, uint8_t minArgs, uint8_t maxArgs,
 	CommandCallback callback, const std::string& description, const std::vector<std::string>& argsDescriptions)
 	: name(name), minArgs(minArgs), maxArgs(maxArgs), callback(callback), description(description), argsDescriptions(argsDescriptions) {
 	assert(!name.empty());

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <stdint.h>
 
 namespace ns {
 	struct Context;
@@ -10,7 +11,7 @@ namespace ns {
 
 	struct Command {
 		std::string name;
-		unsigned char minArgs = 0, maxArgs = 0;
+		uint8_t minArgs = 0, maxArgs = 0;
 		CommandCallback callback = nullptr;
 		std::string description;
 
@@ -30,7 +31,7 @@ namespace ns {
 		 * @param argsDescriptions Arguments description. Should have 2 strings for each argument, where the first one is argument name and the second is argument description.
 		 * @see ns::registerCommands for code example
 		 */
-		Command(const std::string& name, unsigned char minArgs, unsigned char maxArgs, CommandCallback callback, const std::string& description, const std::vector<std::string>& argsDescriptions);
+		Command(const std::string& name, uint8_t minArgs, uint8_t maxArgs, CommandCallback callback, const std::string& description, const std::vector<std::string>& argsDescriptions);
 	
 		std::string getArgumentsNames();
 
