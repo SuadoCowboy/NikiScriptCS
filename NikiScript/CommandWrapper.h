@@ -10,12 +10,12 @@ extern "C" {
 	NIKIAPI ns_Command* ns_CommandNew(const char* name, uint8_t minArgs, uint8_t maxArgs, ns_CommandCallback callback, const char* description, const char* argsDescriptions[]);
 	NIKIAPI void ns_CommandDelete(ns_Command* pCommand);
 
-	NIKIAPI char* ns_CommandAllocGetArgumentsNames(ns_Command* pCommand);
+	NIKIAPI const char* ns_CommandGetArgumentsNames(ns_Command* pCommand);
 
 	NIKIAPI void ns_CommandPrintAsDataTree(ns_Command* pCommand);
 
 	NIKIAPI void ns_CommandSetName(ns_Command* pCommand, const char* name);
-	NIKIAPI char* ns_CommandAllocGetName(ns_Command* pCommand);
+	NIKIAPI const char* ns_CommandGetName(ns_Command* pCommand);
 
 	NIKIAPI void ns_CommandSetMinArgs(ns_Command* pCommand, uint8_t minArgs);
 	NIKIAPI uint8_t ns_CommandGetMinArgs(ns_Command* pCommand);
@@ -27,10 +27,10 @@ extern "C" {
 	NIKIAPI ns_CommandCallback ns_CommandGetCallback(ns_Command* pCommand);
 	
 	NIKIAPI void ns_CommandSetDescription(ns_Command* pCommand, const char* description);
-	NIKIAPI char* ns_CommandAllocGetDescription(ns_Command* pCommand);
+	NIKIAPI const char* ns_CommandGetDescription(ns_Command* pCommand);
 
 	NIKIAPI void ns_CommandSetArgsDescriptions(ns_Command* pCommand, const char* argsDescriptions[]);
-	NIKIAPI char* ns_CommandAllocGetArgDescription(ns_Command* pCommand, uint16_t index);
+	NIKIAPI const char* ns_CommandGetArgDescription(ns_Command* pCommand, uint16_t index);
 
 	NIKIAPI uint16_t ns_CommandGetArgsDescriptionsSize(ns_Command* pCommand);
 }

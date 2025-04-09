@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 public static partial class NikiScript
 {
-	public static class Token
+	public class Token
 	{
 		public enum Type : byte {
 			NONE = 0,
@@ -12,26 +12,40 @@ public static partial class NikiScript
 			END = 8 ///< End of input data
 		};
 
+		public IntPtr TokenPtr { get; private set; }
+
+		public string Value {
+			get => GetValue();
+			set => SetValue(TokenPtr, value);
+		}
+
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenNew", CallingConvention = CallingConvention.Cdecl)]
-		public static extern IntPtr NewToken(byte type, string value);
+		private static extern IntPtr _New(byte type, string value);
+
+		public Token(byte type, string value) {
+			TokenPtr = _New(type, value);
+		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenDelete", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void DeleteToken(IntPtr tokenPtr);
+		private static extern void _Delete(IntPtr tokenPtr);
+		~Token() {
+			_Delete(TokenPtr);
+		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenGetValue", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr _GetTokenValue(IntPtr tokenPtr);
+		private static extern IntPtr _GetValue(IntPtr tokenPtr);
 
-		public static string GetTokenValue(IntPtr tokenPtr) {
-			return Marshal.PtrToStringAnsi(_GetTokenValue(tokenPtr)) ?? "";
+		private string GetValue() {
+			return Marshal.PtrToStringAnsi(_GetValue(TokenPtr)) ?? "";
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenSetValue", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void SetTokenValue(IntPtr tokenPtr, string value);
+		public static extern void SetValue(IntPtr tokenPtr, string value);
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenGetType", CallingConvention = CallingConvention.Cdecl)]
-		public static extern byte GetTokenType(IntPtr tokenPtr);
+		public static extern byte  TokenGetType(IntPtr tokenPtr);
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenSetType", CallingConvention = CallingConvention.Cdecl)]
-		public static extern void SetTokenType(IntPtr tokenPtr, byte type);
+		public static extern void  TokenSetType(IntPtr tokenPtr, byte type);
 	}
 }
