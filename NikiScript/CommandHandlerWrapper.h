@@ -5,11 +5,20 @@
 
 #include "CommandWrapper.h"
 
-extern "C" {
-	// std::unordered_map<std::string, ns_Command> commands;
-	NIKIAPI const char* ns_CommandHandlerGetCommandsNames();
+typedef ns::CommandHandler ns_CommandHandler;
 
-	NIKIAPI ns_Command* ns_CommandHandlerGetCommand(const char* name);
-	NIKIAPI bool ns_CommandHandlerAdd(const ns_Command& command);
-	NIKIAPI void ns_CommandHandlerRemove(const std::string& name, struct ns_Context& ctx);
+extern "C" {
+	NIKIAPI	ns_CommandHandler* ns_CommandHandlerNew();
+	NIKIAPI void ns_CommandHandlerDelete(ns_CommandHandler *pCommandHandler);
+
+	/**
+	 * @brief
+	 * @param pCommandHandler
+	 * @return nullptr if empty else string of commands names separated by spaces
+	 */
+	NIKIAPI const char* ns_CommandHandlerGetCommandsNames(const ns_CommandHandler *pCommandHandler);
+
+	NIKIAPI ns_Command* ns_CommandHandlerGetCommand(ns_CommandHandler *pCommandHandler, const char *name);
+	NIKIAPI bool ns_CommandHandlerAdd(ns_CommandHandler *pCommandHandler, const ns_Command *pCommand);
+	NIKIAPI void ns_CommandHandlerErase(ns_CommandHandler *pCommandHandler, const char *name);
 }
