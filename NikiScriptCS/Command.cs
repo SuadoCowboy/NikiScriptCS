@@ -31,14 +31,14 @@ public static partial class NikiScript
 			set => _SetDescription(CommandPtr, value);
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_newCommand", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandNew", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _New(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions);
 		public Command(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions) {
 			Callback = callback;
 			CommandPtr = _New(name, minArgs, maxArgs, Callback, description, argsDescriptions);
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_deleteCommand", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandDelete", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _Delete(IntPtr commandPtr);
 		public void Delete()
 		{

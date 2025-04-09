@@ -5,15 +5,15 @@
 #include <vector>
 #include <string>
 
-ns_Command* ns_newCommand(const char* name, uint8_t minArgs, uint8_t maxArgs, ns_CommandCallback callback, const char* description, const char* _argsDescriptions[]) {
+ns_Command* ns_CommandNew(const char* name, uint8_t minArgs, uint8_t maxArgs, ns_CommandCallback callback, const char* description, const char* _argsDescriptions[]) {
 	std::vector<std::string> argsDescriptions{};
-	for (uint16_t i = 0; i < maxArgs; i++)
+	for (uint16_t i = 0; i < maxArgs*2; i++)
 		argsDescriptions.push_back(_argsDescriptions[i]);
 
 	return new ns::Command(name, minArgs, maxArgs, callback, description, argsDescriptions);
 }
 
-void ns_deleteCommand(ns_Command* pCommand) {
+void ns_CommandDelete(ns_Command* pCommand) {
 	delete pCommand;
 }
 
@@ -72,7 +72,7 @@ char* ns_CommandAllocGetDescription(ns_Command* pCommand) {
 
 
 void ns_CommandSetArgsDescriptions(ns_Command* pCommand, const char* argsDescriptions[]) {
-	for (uint16_t i = 0; i < pCommand->maxArgs; ++i)
+	for (uint16_t i = 0; i < pCommand->maxArgs*2; ++i)
 		pCommand->argsDescriptions[i] = argsDescriptions[i];
 }
 
