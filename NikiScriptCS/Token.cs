@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 
 public static partial class NikiScript
 {
-	internal static class Token
+	public static class Token
 	{
 		public enum Type : byte {
 			NONE = 0,
