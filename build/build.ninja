@@ -49,6 +49,14 @@ cmake_ninja_workdir = C$:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSh
 
 build cmake_object_order_depends_target_NikiScript: phony || .
 
+build CMakeFiles/NikiScript.dir/NikiScript/BaseWrapper.cpp.obj: CXX_COMPILER__NikiScript_unscanned_Release C$:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/NikiScript/BaseWrapper.cpp || cmake_object_order_depends_target_NikiScript
+  DEFINES = -DBUILD_SHARED=1 -DNikiScript_EXPORTS
+  DEP_FILE = CMakeFiles\NikiScript.dir\NikiScript\BaseWrapper.cpp.obj.d
+  FLAGS = -Wall -Wextra -Werror -m64 -O3 -std=gnu++11
+  INCLUDES = -I"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp"
+  OBJECT_DIR = CMakeFiles\NikiScript.dir
+  OBJECT_FILE_DIR = CMakeFiles\NikiScript.dir\NikiScript
+
 build CMakeFiles/NikiScript.dir/NikiScript/Command.cpp.obj: CXX_COMPILER__NikiScript_unscanned_Release C$:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/NikiScript/Command.cpp || cmake_object_order_depends_target_NikiScript
   DEFINES = -DBUILD_SHARED=1 -DNikiScript_EXPORTS
   DEP_FILE = CMakeFiles\NikiScript.dir\NikiScript\Command.cpp.obj.d
@@ -60,6 +68,14 @@ build CMakeFiles/NikiScript.dir/NikiScript/Command.cpp.obj: CXX_COMPILER__NikiSc
 build CMakeFiles/NikiScript.dir/NikiScript/CommandHandler.cpp.obj: CXX_COMPILER__NikiScript_unscanned_Release C$:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/NikiScript/CommandHandler.cpp || cmake_object_order_depends_target_NikiScript
   DEFINES = -DBUILD_SHARED=1 -DNikiScript_EXPORTS
   DEP_FILE = CMakeFiles\NikiScript.dir\NikiScript\CommandHandler.cpp.obj.d
+  FLAGS = -Wall -Wextra -Werror -m64 -O3 -std=gnu++11
+  INCLUDES = -I"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp"
+  OBJECT_DIR = CMakeFiles\NikiScript.dir
+  OBJECT_FILE_DIR = CMakeFiles\NikiScript.dir\NikiScript
+
+build CMakeFiles/NikiScript.dir/NikiScript/CommandWrapper.cpp.obj: CXX_COMPILER__NikiScript_unscanned_Release C$:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/NikiScript/CommandWrapper.cpp || cmake_object_order_depends_target_NikiScript
+  DEFINES = -DBUILD_SHARED=1 -DNikiScript_EXPORTS
+  DEP_FILE = CMakeFiles\NikiScript.dir\NikiScript\CommandWrapper.cpp.obj.d
   FLAGS = -Wall -Wextra -Werror -m64 -O3 -std=gnu++11
   INCLUDES = -I"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp"
   OBJECT_DIR = CMakeFiles\NikiScript.dir
@@ -153,7 +169,7 @@ build CMakeFiles/NikiScript.dir/NikiScript/Utils.cpp.obj: CXX_COMPILER__NikiScri
 #############################################
 # Link the shared library libNikiScript.dll
 
-build libNikiScript.dll libNikiScript.dll.a: CXX_SHARED_LIBRARY_LINKER__NikiScript_Release CMakeFiles/NikiScript.dir/NikiScript/Command.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/CommandHandler.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Context.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Lexer.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/NikiScript.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Parser.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/PrintCallback.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/PrintCallbackWrapper.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/ProgramVariable.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Token.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/TokenWrapper.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Utils.cpp.obj
+build libNikiScript.dll libNikiScript.dll.a: CXX_SHARED_LIBRARY_LINKER__NikiScript_Release CMakeFiles/NikiScript.dir/NikiScript/BaseWrapper.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Command.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/CommandHandler.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/CommandWrapper.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Context.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Lexer.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/NikiScript.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Parser.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/PrintCallback.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/PrintCallbackWrapper.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/ProgramVariable.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Token.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/TokenWrapper.cpp.obj CMakeFiles/NikiScript.dir/NikiScript/Utils.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -Wall -Wextra -Werror -m64 -O3
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\NikiScript.dir

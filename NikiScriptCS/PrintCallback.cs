@@ -25,8 +25,8 @@ public static partial class NikiScript
 	}
 
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void CallbackDelegate(IntPtr pData, Level level, string message);
+	public delegate void CallbackDelegate(IntPtr dataPtr, Level level, string message);
 
 	[DllImport("libNikiScript.dll", EntryPoint="ns_setPrintCallback", CallingConvention = CallingConvention.Cdecl)]
-	public static extern void SetPrintCallback(IntPtr pData, CallbackDelegate callback);
+	public static extern void SetPrintCallback(IntPtr dataPtr, CallbackDelegate callback);
 }

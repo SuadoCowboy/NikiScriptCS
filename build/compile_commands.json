@@ -1,6 +1,12 @@
 [
 {
   "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\BaseWrapper.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\BaseWrapper.cpp\"",
+  "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\BaseWrapper.cpp",
+  "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\BaseWrapper.cpp.obj"
+},
+{
+  "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\Command.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\Command.cpp\"",
   "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\Command.cpp",
   "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\Command.cpp.obj"
@@ -10,6 +16,12 @@
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\CommandHandler.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\CommandHandler.cpp\"",
   "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\CommandHandler.cpp",
   "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\CommandHandler.cpp.obj"
+},
+{
+  "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DBUILD_SHARED=1 -DNikiScript_EXPORTS -I\"C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp\" -Wall -Wextra -Werror -m64 -O3 -std=gnu++11 -o CMakeFiles\\NikiScript.dir\\NikiScript\\CommandWrapper.cpp.obj -c \"C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\CommandWrapper.cpp\"",
+  "file": "C:\\Users\\emilly\\Documents\\Lucca\\Projetos\\C#\\NikiScriptCSharp\\NikiScript\\CommandWrapper.cpp",
+  "output": "CMakeFiles\\NikiScript.dir\\NikiScript\\CommandWrapper.cpp.obj"
 },
 {
   "directory": "C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build",
