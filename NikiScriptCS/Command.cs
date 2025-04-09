@@ -31,6 +31,11 @@ public static partial class NikiScript
 			set => SetDescription(CommandPtr, value);
 		}
 
+		public string[] ArgsDescriptions {
+			get => GetArgsDescriptions();
+			set => SetArgsDescriptions(value);
+		}
+
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandNew", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _New(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions);
 		public Command(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions)
@@ -114,7 +119,7 @@ public static partial class NikiScript
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetArgsDescriptions", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _SetArgsDescriptions(IntPtr commandPtr, string[] argsDescriptions);
-		public void SetArgsDescriptions(string[] argsDescriptions)
+		private void SetArgsDescriptions(string[] argsDescriptions)
 		{
 			_SetArgsDescriptions(CommandPtr, argsDescriptions);
 		}
@@ -133,7 +138,7 @@ public static partial class NikiScript
 			return _GetArgsDescriptionsSize(CommandPtr);
 		}
 
-		public string[] GetArgsDescriptions()
+		private string[] GetArgsDescriptions()
 		{
 			ushort size = GetArgsDescriptionsSize();
 			string[] argsDescriptions = new string[size];
