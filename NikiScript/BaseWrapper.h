@@ -1,14 +1,15 @@
 #pragma once
 
-#include "DLLExport.h"
-
 #include <stdint.h>
+#include <string>
+
+#include "DLLExport.h"
 
 namespace ns {
 	/**
 	 * @param size not counting null-terminator as it's added automatically
 	 */
-	char* newString(size_t size);
+	char* allocStringToCharArray(const std::string& src);
 }
 
 extern "C" {
