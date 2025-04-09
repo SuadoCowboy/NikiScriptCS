@@ -53,7 +53,13 @@ public static partial class NikiScript
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerAdd", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _Add(IntPtr commandHandlerPtr, IntPtr commandPtr);
-		public bool Add(ref Command command)
+
+		/// <summary>
+		/// Adds command to the command handler and updates command variable to the new command pointer.
+		/// </summary>
+		/// <param name="command"></param>
+		/// <returns>true if success; false if new command pointer == IntPtr.Zero</returns>
+		public bool Move(ref Command command)
 		{
 			IntPtr newCommandPtr = _Add(CommandHandlerPtr, command.CommandPtr);
 			if (newCommandPtr == IntPtr.Zero)
@@ -61,6 +67,20 @@ public static partial class NikiScript
 
 			command.Delete();
 			command = new Command(newCommandPtr);
+			return true;
+		}
+
+		/// <summary>
+		/// Adds command to the command handler. Command variable is not updated.
+		/// </summary>
+		/// <param name="command"></param>
+		/// <returns></returns>
+		public bool Add(Command command)
+		{
+			IntPtr newCommandPtr = _Add(CommandHandlerPtr, command.CommandPtr);
+			if (newCommandPtr == IntPtr.Zero)
+				return false;
+
 			return true;
 		}
 

@@ -22,15 +22,15 @@ class Program
 
 		CommandHandler commands = new();
 
-		commands.Add(ref echoCommand);
 		Command echoCommand4 = new(echoCommand.CommandPtr); // IT HAS TO BE DEFINED AFTER THIS BECAUSE THE DELETE FUNCTION IS CALLED AND A NEW POINTER IS SET
+		commands.Add(echoCommand);
 
-		commands.Add(ref echoCommand2);
+		commands.Move(ref echoCommand2);
 
-		if (!commands.Add(ref echoCommand3))
+		if (!commands.Move(ref echoCommand3))
 			Print(Level.ERROR, $"could not create echoCommand3 because {echoCommand4.Name} command already exists\n");;
 
-		if (!commands.Add(ref echoCommand4))
+		if (!commands.Move(ref echoCommand4))
 			Print(Level.ERROR, $"could not create echoCommand4 because {echoCommand4.Name} command already exists\n");
 
 		Print(Level.ECHO, commands.GetCommandsNames()+'\n');
