@@ -9,7 +9,7 @@ namespace ns {
 	struct Context;
 
 	struct CommandHandler {
-		std::unordered_map<std::string, Command> commands;
+		std::unordered_map<std::string, Command> commands{};
 
 		Command* get(const std::string& name);
 		/**
@@ -21,6 +21,6 @@ namespace ns {
 		 */
 		bool add(const Command& command);
 
-		void remove(const std::string& name, Context& ctx);
+		void remove(Context& pCtx, const std::string& name);
 	};
 }
