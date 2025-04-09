@@ -7,10 +7,8 @@
 
 ns_Command* ns_newCommand(const char* name, uint8_t minArgs, uint8_t maxArgs, ns_CommandCallback callback, const char* description, const char* _argsDescriptions[]) {
 	std::vector<std::string> argsDescriptions{};
-	for (uint16_t i = 0; i < maxArgs*2; i += 2) {
+	for (uint16_t i = 0; i < maxArgs; i++)
 		argsDescriptions.push_back(_argsDescriptions[i]);
-		argsDescriptions.push_back(_argsDescriptions[i + 1]);
-	}
 
 	return new ns::Command(name, minArgs, maxArgs, callback, description, argsDescriptions);
 }
@@ -74,10 +72,8 @@ char* ns_CommandAllocGetDescription(ns_Command* pCommand) {
 
 
 void ns_CommandSetArgsDescriptions(ns_Command* pCommand, const char* argsDescriptions[]) {
-	for (uint16_t i = 0; i < pCommand->maxArgs*2; i += 2) {
+	for (uint16_t i = 0; i < pCommand->maxArgs; ++i)
 		pCommand->argsDescriptions[i] = argsDescriptions[i];
-		pCommand->argsDescriptions[i + 1] = argsDescriptions[i + 1];
-	}
 }
 
 char* ns_CommandAllocGetArgDescription(ns_Command* pCommand, uint16_t index) {
