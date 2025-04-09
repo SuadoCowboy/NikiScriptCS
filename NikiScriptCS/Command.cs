@@ -39,17 +39,8 @@ public static partial class NikiScript
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandDelete", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void _Delete(IntPtr commandPtr);
-		public void Delete()
-		{
-			if (CommandPtr == IntPtr.Zero) return;
-			_Delete(CommandPtr);
-			CommandPtr = IntPtr.Zero;
-		}
-
-		~Command() {
-			_Delete(CommandPtr);
-		}
+		private static extern void Delete(IntPtr commandPtr);
+		~Command() { Delete(CommandPtr); }
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetArgumentsNames", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetArgumentsNames(IntPtr commandPtr);
