@@ -10,24 +10,25 @@ class Program
 	static void Main()
 	{
 		SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
-
-		Print(Level.WARNING, "This is a warning from C#!\n");
-		PrintUnknownCommand("echo_blazulite");
-
-		for (Level i = Level.DEFAULT; i != Level.ERROR+1; ++i)
-			Print(i, $"PrintLevel as string: {LevelToString(i)}\n");
-
 		Command echoCommand = new("echo", 1, 1, new Command.CallbackDelegate(Echo), "Echoes the arguments", ["s[text]", "text to print out"]);
 
-		string echoParams = echoCommand.GetArgumentsNames();
-		Print(Level.ECHO, $"Args = {echoParams}\n");
+		echoCommand.PrintAsDataTree();
 
-		echoCommand.Callback(IntPtr.Zero);
+		echoCommand.Name = "echo2";
 
+		echoCommand.Description = "Echoes the arguments, but with a different name";
+		
+		ushort size = echoCommand.GetArgsDescriptionsSize();
+		Print(Level.ECHO, $"{size-1} -> {echoCommand.GetArgDescription((ushort)(size-1))}\n");
+		
+		echoCommand.MinArgs = 10;
+		echoCommand.MaxArgs = 69;
+
+		echoCommand.PrintAsDataTree();
 		echoCommand.Delete();
 	}
 
-	static void PrintHandler(IntPtr pData, Level level, string message)
+	static void PrintHandler(IntPtr dataPtr, Level level, string message)
 	{
 		switch (level) {
 		case Level.DEFAULT:
