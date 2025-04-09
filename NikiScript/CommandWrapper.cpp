@@ -22,7 +22,7 @@ void ns_deleteCommand(ns_Command* pCommand) {
 
 const char* ns_CommandAllocGetArgumentsNames(ns_Command* pCommand) {
 	std::string temp = pCommand->getArgumentsNames();
-	char* out = ns_newString(temp.size()+1);
+	char* out = ns::newString(temp.size());
 	memcpy(out, temp.c_str(), temp.size());
 
 	return out;

@@ -37,7 +37,7 @@ public static partial class NikiScript
 			IntPtr argsPtr = _AllocGetArgumentsNames(CommandPtr);
 
 			string str = Marshal.PtrToStringAnsi(argsPtr) ?? "";
-			Base.DeleteString(argsPtr);
+			DeleteString(argsPtr);
 			return str;
 		}
 

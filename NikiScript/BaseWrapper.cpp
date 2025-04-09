@@ -1,7 +1,7 @@
 #include "BaseWrapper.h"
 
-char* ns_newString(size_t size) {
-	char* string = new char[size];
+char* ns::newString(size_t size) {
+	char* string = new char[size+1];
 	string[size] = '\0';
 	return string;
 }

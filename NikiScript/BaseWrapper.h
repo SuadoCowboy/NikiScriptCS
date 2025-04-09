@@ -4,10 +4,13 @@
 
 #include <stdint.h>
 
-extern "C" {
+namespace ns {
 	/**
-	 * @param size includeint null-terminator
+	 * @param size not counting null-terminator as it's added automatically
 	 */
-	NIKIAPI char* ns_newString(size_t size);
+	char* newString(size_t size);
+}
+
+extern "C" {
 	NIKIAPI void ns_freeString(char* string);
 }
