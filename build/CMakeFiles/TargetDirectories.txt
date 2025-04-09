@@ -1,3 +1,0 @@
-C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build/CMakeFiles/NikiScript.dir
-C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build/CMakeFiles/edit_cache.dir
-C:/Users/emilly/Documents/Lucca/Projetos/C#/NikiScriptCSharp/build/CMakeFiles/rebuild_cache.dir
