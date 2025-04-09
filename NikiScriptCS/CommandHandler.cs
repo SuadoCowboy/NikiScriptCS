@@ -59,6 +59,7 @@ public static partial class NikiScript
 			if (newCommandPtr == IntPtr.Zero)
 				return false;
 
+			command.Delete();
 			command = new Command(newCommandPtr);
 			return true;
 		}
