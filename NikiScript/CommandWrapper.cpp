@@ -3,14 +3,10 @@
 #include <vector>
 #include <string>
 
-#include <iostream>
-
 ns_Command* ns_CommandNew(const char *name, uint8_t minArgs, uint8_t maxArgs, ns_CommandCallback callback, const char *description, const char **_argsDescriptions) {
 	std::vector<std::string> argsDescriptions{};
-	for (uint16_t i = 0; i < static_cast<uint16_t>(maxArgs)*2; ++i) {
+	for (uint16_t i = 0; i < static_cast<uint16_t>(maxArgs)*2; ++i)
 		argsDescriptions.push_back(_argsDescriptions[i]);
-		std::cout << _argsDescriptions[i] << std::endl;
-	}
 
 	return new ns::Command(name, minArgs, maxArgs, callback, description, argsDescriptions);
 }
