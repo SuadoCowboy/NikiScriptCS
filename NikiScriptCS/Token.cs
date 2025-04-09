@@ -12,26 +12,26 @@ public static partial class NikiScript
 			END = 8 ///< End of input data
 		};
 
-		[DllImport("libNikiScript.dll", EntryPoint="ns_newToken", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenNew", CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr NewToken(byte type, string value);
 
-		[DllImport("libNikiScript.dll", EntryPoint="ns_deleteToken", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenDelete", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void DeleteToken(IntPtr tokenPtr);
 
-		[DllImport("libNikiScript.dll", EntryPoint="ns_getTokenValue", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenGetValue", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetTokenValue(IntPtr tokenPtr);
 
 		public static string GetTokenValue(IntPtr tokenPtr) {
 			return Marshal.PtrToStringAnsi(_GetTokenValue(tokenPtr)) ?? "";
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint="ns_setTokenValue", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenSetValue", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetTokenValue(IntPtr tokenPtr, string value);
 
-		[DllImport("libNikiScript.dll", EntryPoint="ns_getTokenType", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenGetType", CallingConvention = CallingConvention.Cdecl)]
 		public static extern byte GetTokenType(IntPtr tokenPtr);
 
-		[DllImport("libNikiScript.dll", EntryPoint="ns_setTokenType", CallingConvention = CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenSetType", CallingConvention = CallingConvention.Cdecl)]
 		public static extern void SetTokenType(IntPtr tokenPtr, byte type);
 	}
 }

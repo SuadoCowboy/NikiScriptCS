@@ -13,28 +13,28 @@ extern "C" {
 #endif
 
 // Create/Destroy
-NIKIAPI ns_Token* ns_newToken(ns_TokenType type, const char* value);
-NIKIAPI void ns_deleteToken(ns_Token* token);
+NIKIAPI ns_Token* ns_TokenNew(ns_TokenType type, const char* value);
+NIKIAPI void ns_TokenDelete(ns_Token* token);
 
-NIKIAPI ns_TokenType ns_getTokenType(ns_Token* pToken);
-NIKIAPI void ns_setTokenType(ns_Token* pToken, ns_TokenType type);
+NIKIAPI ns_TokenType ns_TokenGetType(ns_Token* pToken);
+NIKIAPI void ns_TokenSetType(ns_Token* pToken, ns_TokenType type);
 
 // Value Get/Set
-NIKIAPI const char* ns_getTokenValue(ns_Token* token);
-NIKIAPI void ns_setTokenValue(ns_Token* token, const char* value);
+NIKIAPI const char* ns_TokenGetValue(ns_Token* token);
+NIKIAPI void ns_TokenSetValue(ns_Token* token, const char* value);
 
 // Reference count
-NIKIAPI size_t ns_getTokenReferenceCount(ns_Token* token);
+NIKIAPI size_t ns_TokenGetReferenceCount(ns_Token* token);
 
 // Get reference at index
-NIKIAPI uint64_t ns_getTokenReferenceIndex(ns_Token* token, size_t i);
-NIKIAPI const char* ns_getTokenReferenceString(ns_Token* token, size_t i);
+NIKIAPI uint64_t ns_TokenGetReferenceIndex(ns_Token* token, size_t i);
+NIKIAPI const char* ns_TokenGetReferenceString(ns_Token* token, size_t i);
 
 // Add a reference
-NIKIAPI void ns_addTokenReference(ns_Token* token, uint64_t index, const char* str);
+NIKIAPI void ns_TokenAddReference(ns_Token* token, uint64_t index, const char* str);
 
 // Clear references
-NIKIAPI void ns_clearTokenReferences(ns_Token* token);
+NIKIAPI void ns_TokenClearReferences(ns_Token* token);
 
 #ifdef __cplusplus
 }
