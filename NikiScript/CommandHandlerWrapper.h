@@ -21,4 +21,5 @@ extern "C" {
 	NIKIAPI ns_Command* ns_CommandHandlerGetCommand(ns_CommandHandler *pCommandHandler, const char *name);
 	NIKIAPI ns_Command* ns_CommandHandlerAdd(ns_CommandHandler *pCommandHandler, const ns_Command *pCommand);
 	NIKIAPI void ns_CommandHandlerErase(ns_CommandHandler *pCommandHandler, const char *name);
+	NIKIAPI void ns_CommandHandlerClear(ns_CommandHandler *pCommandHandler);
 }

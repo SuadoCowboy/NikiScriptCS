@@ -43,3 +43,7 @@ ns_Command* ns_CommandHandlerAdd(ns_CommandHandler *pCommandHandler, const ns_Co
 void ns_CommandHandlerErase(ns_CommandHandler *pCommandHandler, const char *name) {
 	pCommandHandler->commands.erase(name);
 }
+
+void ns_CommandHandlerClear(ns_CommandHandler *pCommandHandler) {
+	pCommandHandler->commands.clear();
+}

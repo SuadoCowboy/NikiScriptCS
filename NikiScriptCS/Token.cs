@@ -28,8 +28,12 @@ public static partial class NikiScript
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenDelete", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _Delete(IntPtr tokenPtr);
-		~Token() {
+		public void Delete() {
+			if (TokenPtr == IntPtr.Zero)
+				return;
+
 			_Delete(TokenPtr);
+			TokenPtr = IntPtr.Zero;
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenGetValue", CallingConvention = CallingConvention.Cdecl)]

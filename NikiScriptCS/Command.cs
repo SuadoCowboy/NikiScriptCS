@@ -46,8 +46,14 @@ public static partial class NikiScript
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandDelete", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void Delete(IntPtr commandPtr);
-		~Command() { Delete(CommandPtr); }
+		private static extern void _Delete(IntPtr commandPtr);
+		public void Delete()
+		{
+			if (CommandPtr == IntPtr.Zero)
+				return;
+			_Delete(CommandPtr);
+			CommandPtr = IntPtr.Zero;
+		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetArgumentsNames", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetArgumentsNames(IntPtr commandPtr);
@@ -56,32 +62,32 @@ public static partial class NikiScript
 			return Marshal.PtrToStringAnsi(_GetArgumentsNames(CommandPtr)) ?? "";
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandPrintAsDataTree", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandPrintAsDataTree", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _PrintAsDataTree(IntPtr commandPtr);
 		public void PrintAsDataTree() { _PrintAsDataTree(CommandPtr); }
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetName", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetName", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SetName(IntPtr commandPtr, string name);
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetName", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetName", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetName(IntPtr commandPtr);
 		private string GetName() {
 			return Marshal.PtrToStringAnsi(_GetName(CommandPtr)) ?? "";
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetMinArgs", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetMinArgs", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SetMinArgs(IntPtr commandPtr, byte minArgs);
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetMinArgs", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetMinArgs", CallingConvention = CallingConvention.Cdecl)]
 		private static extern byte GetMinArgs(IntPtr commandPtr);
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetMaxArgs", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetMaxArgs", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SetMaxArgs(IntPtr commandPtr, byte maxArgs);
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetMaxArgs", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetMaxArgs", CallingConvention = CallingConvention.Cdecl)]
 		private static extern byte GetMaxArgs(IntPtr commandPtr);
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetCallback", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetCallback", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _SetCallback(IntPtr commandPtr, CallbackDelegate callback);
 		public void SetCallback(CallbackDelegate callback)
 		{
@@ -89,38 +95,38 @@ public static partial class NikiScript
 			_SetCallback(CommandPtr, callback);
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetCallback", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetCallback", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetCallback(IntPtr commandPtr);
 		private CallbackDelegate GetCallback()
 		{
 			return Marshal.GetDelegateForFunctionPointer<CallbackDelegate>(_GetCallback(CommandPtr));
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetDescription", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetDescription", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void SetDescription(IntPtr commandPtr, string description);
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetDescription", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetDescription", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetDescription(IntPtr commandPtr);
 		private string GetDescription()
 		{
 			return Marshal.PtrToStringAnsi(_GetDescription(CommandPtr)) ?? "";
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetArgsDescriptions", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetArgsDescriptions", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _SetArgsDescriptions(IntPtr commandPtr, string[] argsDescriptions);
 		public void SetArgsDescriptions(string[] argsDescriptions)
 		{
 			_SetArgsDescriptions(CommandPtr, argsDescriptions);
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetArgDescription", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetArgDescription", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetArgDescription(IntPtr commandPtr, ushort index);
 		public string GetArgDescription(ushort index)
 		{
 			return Marshal.PtrToStringAnsi(_GetArgDescription(CommandPtr, index)) ?? "";
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetArgsDescriptionsSize", CallingConvention =CallingConvention.Cdecl)]
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetArgsDescriptionsSize", CallingConvention = CallingConvention.Cdecl)]
 		private static extern ushort _GetArgsDescriptionsSize(IntPtr commandPtr);
 		public ushort GetArgsDescriptionsSize()
 		{
