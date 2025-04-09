@@ -7,7 +7,7 @@ public static partial class NikiScript
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		public delegate void CallbackDelegate(IntPtr ctxPtr);
 
-		public CallbackDelegate Callback;
+		public CallbackDelegate Callback { get; private set; }
 
 		public IntPtr CommandPtr { get; private set; }
 
@@ -27,7 +27,7 @@ public static partial class NikiScript
 		}
 
 		public string Description {
-			get => GetDescription();
+			get => _GetDescription();
 			set => _SetDescription(CommandPtr, value);
 		}
 
@@ -90,18 +90,21 @@ public static partial class NikiScript
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetMaxArgs", CallingConvention =CallingConvention.Cdecl)]
 		private static extern byte _GetMaxArgs(IntPtr commandPtr);
 
+		// TODO: get; set for Callback??? If it doesn't work just remove those two functions then
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetCallback", CallingConvention =CallingConvention.Cdecl)]
 		private static extern void _SetCallback(IntPtr commandPtr, CallbackDelegate callback);
+		public void SetCallback(CallbackDelegate callback)
+		{
+			Callback = callback;
+			_SetCallback(CommandPtr, callback);
+		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetCallback", CallingConvention =CallingConvention.Cdecl)]
-		private static extern IntPtr _GetCallback(IntPtr commandPtr);
-	
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetDescription", CallingConvention =CallingConvention.Cdecl)]
 		private static extern void _SetDescription(IntPtr commandPtr, string description);
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandAllocGetDescription", CallingConvention =CallingConvention.Cdecl)]
 		private static extern IntPtr _AllocGetDescription(IntPtr commandPtr);
-		public string GetDescription()
+		private string _GetDescription()
 		{
 			IntPtr descriptionPtr = _AllocGetDescription(CommandPtr);
 			string description = Marshal.PtrToStringAnsi(descriptionPtr) ?? "";
@@ -111,6 +114,10 @@ public static partial class NikiScript
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetArgsDescriptions", CallingConvention =CallingConvention.Cdecl)]
 		private static extern void _SetArgsDescriptions(IntPtr commandPtr, string[] argsDescriptions);
+		public void SetArgsDescriptions(string[] argsDescriptions)
+		{
+			_SetArgsDescriptions(CommandPtr, argsDescriptions);
+		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandAllocGetArgDescription", CallingConvention =CallingConvention.Cdecl)]
 		private static extern IntPtr _AllocGetArgDescription(IntPtr commandPtr, ushort index);
