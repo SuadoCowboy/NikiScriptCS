@@ -33,9 +33,16 @@ public static partial class NikiScript
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandNew", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _New(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions);
-		public Command(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions) {
+		public Command(string name, byte minArgs, byte maxArgs, CallbackDelegate callback, string description, string[] argsDescriptions)
+		{
 			Callback = callback;
 			CommandPtr = _New(name, minArgs, maxArgs, Callback, description, argsDescriptions);
+		}
+
+		public Command(IntPtr commandPtr)
+		{
+			CommandPtr = commandPtr;
+			Callback = GetCallback();
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandDelete", CallingConvention = CallingConvention.Cdecl)]
@@ -74,13 +81,19 @@ public static partial class NikiScript
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetMaxArgs", CallingConvention =CallingConvention.Cdecl)]
 		private static extern byte GetMaxArgs(IntPtr commandPtr);
 
-		// TODO: get; set for Callback??? If it doesn't work just remove those two functions then
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetCallback", CallingConvention =CallingConvention.Cdecl)]
 		private static extern void _SetCallback(IntPtr commandPtr, CallbackDelegate callback);
 		public void SetCallback(CallbackDelegate callback)
 		{
 			Callback = callback;
 			_SetCallback(CommandPtr, callback);
+		}
+
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandGetCallback", CallingConvention =CallingConvention.Cdecl)]
+		private static extern IntPtr _GetCallback(IntPtr commandPtr);
+		private CallbackDelegate GetCallback()
+		{
+			return Marshal.GetDelegateForFunctionPointer<CallbackDelegate>(_GetCallback(CommandPtr));
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandSetDescription", CallingConvention =CallingConvention.Cdecl)]
@@ -114,7 +127,8 @@ public static partial class NikiScript
 			return _GetArgsDescriptionsSize(CommandPtr);
 		}
 
-		public string[] GetArgsDescriptions() {
+		public string[] GetArgsDescriptions()
+		{
 			ushort size = GetArgsDescriptionsSize();
 			string[] argsDescriptions = new string[size];
 			for (ushort i = 0; i < size; i++) {
