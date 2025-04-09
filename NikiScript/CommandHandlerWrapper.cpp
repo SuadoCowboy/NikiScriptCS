@@ -13,12 +13,12 @@ NIKIAPI void ns_CommandHandlerDelete(ns_CommandHandler *pCommandHandler) {
 }
 
 // std::unordered_map<std::string, ns_Command> commands;
-const char* ns_CommandHandlerGetCommandsNames(ns_CommandHandler *pCommand) {
-	if (pCommand->commands.empty())
+const char* ns_CommandHandlerGetCommandsNames(const ns_CommandHandler *pCommandHandler) {
+	if (pCommandHandler->commands.empty())
 		return nullptr;
 
 	std::string names = "";
-	for (auto it = pCommand->commands.begin(); it != pCommand->commands.end(); ++it)
+	for (auto it = pCommandHandler->commands.begin(); it != pCommandHandler->commands.end(); ++it)
 		names += it->first + " ";
 	names.erase(names.size()-1);
 
