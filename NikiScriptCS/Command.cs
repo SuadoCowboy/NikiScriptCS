@@ -135,5 +135,14 @@ public static partial class NikiScript
 		{
 			return _GetArgsDescriptionsSize(CommandPtr);
 		}
+
+		public string[] GetArgsDescriptions() {
+			ushort size = GetArgsDescriptionsSize();
+			string[] argsDescriptions = new string[size];
+			for (ushort i = 0; i < size; i++) {
+				argsDescriptions[i] = GetArgDescription(i);
+			}
+			return argsDescriptions;
+		}
 	}
 }

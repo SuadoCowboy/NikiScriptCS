@@ -7,6 +7,11 @@ class Program
 		Print(Level.ECHO, "For now we can't use ctx :clown:\n");
 	}
 
+	static void Echo2(IntPtr pCtx)
+	{
+		Print(Level.ECHO, "Echo2 got called :smirk:\n");
+	}
+
 	static void Main()
 	{
 		SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
@@ -17,12 +22,15 @@ class Program
 		echoCommand.Name = "echo2";
 
 		echoCommand.Description = "Echoes the arguments, but with a different name";
-		
+
 		ushort size = echoCommand.GetArgsDescriptionsSize();
 		Print(Level.ECHO, $"{size-1} -> {echoCommand.GetArgDescription((ushort)(size-1))}\n");
-		
+
 		echoCommand.MinArgs = 10;
 		echoCommand.MaxArgs = 69;
+
+		echoCommand.SetCallback(new Command.CallbackDelegate(Echo2));
+		echoCommand.Callback(IntPtr.Zero);
 
 		echoCommand.PrintAsDataTree();
 		echoCommand.Delete();
