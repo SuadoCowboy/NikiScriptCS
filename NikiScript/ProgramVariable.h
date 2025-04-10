@@ -21,7 +21,7 @@ namespace ns {
 		SetProgramVariableValue set = nullptr;
 
 		ProgramVariable();
-		ProgramVariable(void* pVariable, const std::string& description, const GetProgramVariableValue& get, const SetProgramVariableValue& set);
+		ProgramVariable(void* pValue, const std::string& description, const GetProgramVariableValue& get, const SetProgramVariableValue& set);
 	};
 
 	typedef std::unordered_map<std::string, ProgramVariable> ProgramVariables;
