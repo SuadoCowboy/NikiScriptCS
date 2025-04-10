@@ -8,24 +8,11 @@ ns_CommandHandler* ns_CommandHandlerNew() {
 	return new ns_CommandHandler();
 }
 
-NIKIAPI void ns_CommandHandlerDelete(ns_CommandHandler *pCommandHandler) {
+void ns_CommandHandlerDelete(ns_CommandHandler *pCommandHandler) {
 	delete pCommandHandler;
 }
 
-// std::unordered_map<std::string, ns_Command> commands;
-const char* ns_CommandHandlerGetCommandsNames(const ns_CommandHandler *pCommandHandler) {
-	if (pCommandHandler->commands.empty())
-		return nullptr;
-
-	std::string names = "";
-	for (auto it = pCommandHandler->commands.begin(); it != pCommandHandler->commands.end(); ++it)
-		names += it->first + " ";
-	names.erase(names.size()-1);
-
-	return ns::allocStringToCharArray(names);
-}
-
-ns_Command* ns_CommandHandlerGetCommand(ns_CommandHandler *pCommandHandler, const char *name) {
+ns_Command* ns_CommandHandlerGet(ns_CommandHandler *pCommandHandler, const char *name) {
 	auto it = pCommandHandler->commands.find(name);
 	if (it == pCommandHandler->commands.end())
 		return nullptr;
@@ -46,4 +33,26 @@ void ns_CommandHandlerErase(ns_CommandHandler *pCommandHandler, const char *name
 
 void ns_CommandHandlerClear(ns_CommandHandler *pCommandHandler) {
 	pCommandHandler->commands.clear();
+}
+
+const char** ns_CommandHandlerAllocKeys(ns_CommandHandler *pCommandHandler) {
+	const char **keys = new const char*[pCommandHandler->commands.size()];
+	if (keys == nullptr)
+		return nullptr;
+
+	uint64_t i = 0;
+	for (auto it = pCommandHandler->commands.begin(); it != pCommandHandler->commands.end(); ++it) {
+		keys[i] = it->first.c_str();
+		++i;
+	}
+
+	return keys;
+}
+
+void ns_CommandHandlerFreeKeys(const char **keys) {
+	delete[] keys;
+}
+
+uint64_t ns_CommandHandlerSize(ns_CommandHandler *pCommandHandler) {
+	return pCommandHandler->commands.size();
 }

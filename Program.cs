@@ -17,8 +17,8 @@ class Program
 		SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
 
 		Command echoCommand = new("echo", 1, 1, Echo, "Echoes the arguments", ["s[text]", "text to print out"]);
-		Command echoCommand2 = new($"{echoCommand.Name}2", echoCommand.MinArgs, echoCommand.MaxArgs, echoCommand.Callback, echoCommand.Description, echoCommand.ArgsDescriptions);
-		Command echoCommand3 = new("echo", 1, 1, Echo2, "Echoes again", ["s[text2]", "text to print out again lol"]);
+		Command echoCommand2 = new($"{echoCommand.Name}2", echoCommand.MinArgs, echoCommand.MaxArgs, Echo2, echoCommand.Description, echoCommand.ArgsDescriptions);
+		Command echoCommand3 = new("echo", 1, 1, echoCommand.Callback, "Echoes again", ["s[text2]", "text to print out again lol"]);
 
 		CommandHandler commands = new();
 
@@ -28,12 +28,16 @@ class Program
 		commands.Move(ref echoCommand2);
 
 		if (!commands.Move(ref echoCommand3))
-			Print(Level.ERROR, $"could not create echoCommand3 because {echoCommand4.Name} command already exists\n");;
+			Print(Level.ERROR, $"could not create echoCommand3 because command \"{echoCommand4.Name}\" already exists\n");;
 
 		if (!commands.Move(ref echoCommand4))
-			Print(Level.ERROR, $"could not create echoCommand4 because {echoCommand4.Name} command already exists\n");
+			Print(Level.ERROR, $"could not create echoCommand4 because command \"{echoCommand4.Name}\" already exists\n");
 
-		Print(Level.ECHO, commands.GetCommandsNames()+'\n');
+		foreach (string command in commands.Keys()) {
+			Print(Level.ECHO, $"Command: {command}\n");
+			commands.Get(command)?.Callback(IntPtr.Zero);
+		}
+
 		commands.Delete();
 	}
 

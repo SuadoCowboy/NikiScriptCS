@@ -28,23 +28,45 @@ public static partial class NikiScript
 			CommandHandlerPtr = IntPtr.Zero;
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerGetCommandsNames", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr _GetCommandsNames(IntPtr commandHandlerPtr);
-		public string GetCommandsNames()
-		{
-			IntPtr namesPtr = _GetCommandsNames(CommandHandlerPtr);
-			if (namesPtr == IntPtr.Zero)
-				return string.Empty;
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerSize", CallingConvention = CallingConvention.Cdecl)]
+		private static extern ulong _Size(IntPtr commandHandlerPtr);
+		public ulong Size() { return _Size(CommandHandlerPtr); }
 
-			string names = Marshal.PtrToStringAnsi(namesPtr) ?? string.Empty;
-			return names;
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerFreeKeys", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void _FreeKeys(IntPtr keysPtr);
+
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerAllocKeys", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr _AllocKeys(IntPtr commandHandlerPtr);
+		public string[] Keys()
+		{
+			// const char**
+			IntPtr keysPtrPtr = _AllocKeys(CommandHandlerPtr);
+			if (keysPtrPtr == IntPtr.Zero)
+				return [];
+
+			int nEntries = (int)_Size(CommandHandlerPtr); // The number of narrow strings in the array
+
+			// const char*[]
+			IntPtr[] keysPtrs = new IntPtr[nEntries];
+			Marshal.Copy(keysPtrPtr, keysPtrs, 0, nEntries);
+
+			string[] keys = new string[nEntries];
+
+			int i = 0;
+			foreach(IntPtr keyPtr in keysPtrs) {
+				keys[i] = Marshal.PtrToStringAnsi(keyPtr) ?? string.Empty;
+				++i;
+			}
+
+			_FreeKeys(keysPtrPtr);
+			return keys;
 		}
 
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerGetCommand", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr _GetCommand(IntPtr commandHandlerPtr, string name);
-		public Command? GetCommand(string name)
+		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerGet", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr _Get(IntPtr commandHandlerPtr, string name);
+		public Command? Get(string name)
 		{
-			IntPtr commandPtr = _GetCommand(CommandHandlerPtr, name);
+			IntPtr commandPtr = _Get(CommandHandlerPtr, name);
 			if (commandPtr == IntPtr.Zero)
 				return null;
 
