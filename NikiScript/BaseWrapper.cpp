@@ -9,8 +9,9 @@ char* ns::allocStringToCharString(const std::string& src) {
 }
 
 void ns_freeCharString(char* string) {
-	if (string != nullptr) {
-		delete[] string;
-		string = nullptr;
-	}
+	delete[] string;
+}
+
+void ns_freeCharArray(const char** keys) {
+	delete[] keys;
 }
