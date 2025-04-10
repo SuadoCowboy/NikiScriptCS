@@ -26,7 +26,6 @@ extern "C" {
 	NIKIAPI ns_SetProgramVariableValue ns_ProgramVariableGetSetter(ns_ProgramVariable* pVar);
 	NIKIAPI void ns_ProgramVariableSetSetter(ns_ProgramVariable* pVar, ns_SetProgramVariableValue set);
 
-	// TODO: typedef std::unordered_map<std::string, ProgramVariable> ProgramVariables;
 	NIKIAPI ns_ProgramVariables* ns_ProgramVariablesNew();
 	NIKIAPI void ns_ProgramVariablesDelete(ns_ProgramVariables* pVars);
 
