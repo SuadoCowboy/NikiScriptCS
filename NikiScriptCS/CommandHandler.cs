@@ -4,17 +4,17 @@ public static partial class NikiScript
 {
 	public class CommandHandler
 	{
-		public IntPtr CommandHandlerPtr { get; private set; }
+		public IntPtr Ptr { get; private set; }
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerNew", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _New();
 
 		public CommandHandler() {
-			CommandHandlerPtr = _New();
+			Ptr = _New();
 		}
 
 		public CommandHandler(IntPtr commandHandlerPtr) {
-			CommandHandlerPtr = commandHandlerPtr;
+			Ptr = commandHandlerPtr;
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerNew", CallingConvention = CallingConvention.Cdecl)]
@@ -22,29 +22,26 @@ public static partial class NikiScript
 
 		public void Delete()
 		{
-			if (CommandHandlerPtr == IntPtr.Zero)
+			if (Ptr == IntPtr.Zero)
 				return;
-			_Delete(CommandHandlerPtr);
-			CommandHandlerPtr = IntPtr.Zero;
+			_Delete(Ptr);
+			Ptr = IntPtr.Zero;
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerSize", CallingConvention = CallingConvention.Cdecl)]
 		private static extern ulong _Size(IntPtr commandHandlerPtr);
-		public ulong Size() { return _Size(CommandHandlerPtr); }
-
-		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerFreeKeys", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void _FreeKeys(IntPtr keysPtr);
+		public ulong Size() { return _Size(Ptr); }
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerAllocKeys", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _AllocKeys(IntPtr commandHandlerPtr);
 		public string[] Keys()
 		{
 			// const char**
-			IntPtr keysPtrPtr = _AllocKeys(CommandHandlerPtr);
+			IntPtr keysPtrPtr = _AllocKeys(Ptr);
 			if (keysPtrPtr == IntPtr.Zero)
 				return [];
 
-			int nEntries = (int)_Size(CommandHandlerPtr); // The number of narrow strings in the array
+			int nEntries = (int)_Size(Ptr); // The number of narrow strings in the array
 
 			// const char*[]
 			IntPtr[] keysPtrs = new IntPtr[nEntries];
@@ -58,7 +55,7 @@ public static partial class NikiScript
 				++i;
 			}
 
-			_FreeKeys(keysPtrPtr);
+			DeleteArrayOfStringPointers(keysPtrPtr);
 			return keys;
 		}
 
@@ -66,7 +63,7 @@ public static partial class NikiScript
 		private static extern IntPtr _Get(IntPtr commandHandlerPtr, string name);
 		public Command? Get(string name)
 		{
-			IntPtr commandPtr = _Get(CommandHandlerPtr, name);
+			IntPtr commandPtr = _Get(Ptr, name);
 			if (commandPtr == IntPtr.Zero)
 				return null;
 
@@ -83,7 +80,7 @@ public static partial class NikiScript
 		/// <returns>true if success; false if new command pointer == IntPtr.Zero</returns>
 		public bool Move(ref Command command)
 		{
-			IntPtr newCommandPtr = _Add(CommandHandlerPtr, command.CommandPtr);
+			IntPtr newCommandPtr = _Add(Ptr, command.Ptr);
 			if (newCommandPtr == IntPtr.Zero)
 				return false;
 
@@ -96,10 +93,10 @@ public static partial class NikiScript
 		/// Adds command to the command handler. Command variable is not updated.
 		/// </summary>
 		/// <param name="command"></param>
-		/// <returns></returns>
+		/// <returns>true if success; false if new program variable pointer == IntPtr.Zero</returns>
 		public bool Add(Command command)
 		{
-			IntPtr newCommandPtr = _Add(CommandHandlerPtr, command.CommandPtr);
+			IntPtr newCommandPtr = _Add(Ptr, command.Ptr);
 			if (newCommandPtr == IntPtr.Zero)
 				return false;
 
@@ -110,14 +107,14 @@ public static partial class NikiScript
 		public static extern void _Erase(IntPtr commandHandlerPtr, string name);
 		public void Erase(string name)
 		{
-			_Erase(CommandHandlerPtr, name);
+			_Erase(Ptr, name);
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerClear", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _Clear(IntPtr commandHandlerPtr);
 		public void Clear()
 		{
-			_Clear(CommandHandlerPtr);
+			_Clear(Ptr);
 		}
 	}
 }

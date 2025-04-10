@@ -12,35 +12,35 @@ public static partial class NikiScript
 			END = 8 ///< End of input data
 		};
 
-		public IntPtr TokenPtr { get; private set; }
+		public IntPtr Ptr { get; private set; }
 
 		public string Value {
 			get => GetValue();
-			set => SetValue(TokenPtr, value);
+			set => SetValue(Ptr, value);
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenNew", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _New(byte type, string value);
 
 		public Token(byte type, string value) {
-			TokenPtr = _New(type, value);
+			Ptr = _New(type, value);
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenDelete", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void _Delete(IntPtr tokenPtr);
 		public void Delete() {
-			if (TokenPtr == IntPtr.Zero)
+			if (Ptr == IntPtr.Zero)
 				return;
 
-			_Delete(TokenPtr);
-			TokenPtr = IntPtr.Zero;
+			_Delete(Ptr);
+			Ptr = IntPtr.Zero;
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenGetValue", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _GetValue(IntPtr tokenPtr);
 
 		private string GetValue() {
-			return Marshal.PtrToStringAnsi(_GetValue(TokenPtr)) ?? "";
+			return Marshal.PtrToStringAnsi(_GetValue(Ptr)) ?? "";
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint="ns_TokenSetValue", CallingConvention = CallingConvention.Cdecl)]
