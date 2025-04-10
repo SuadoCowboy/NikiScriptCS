@@ -34,30 +34,7 @@ public static partial class NikiScript
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerAllocKeys", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _AllocKeys(IntPtr commandHandlerPtr);
-		public string[] Keys()
-		{
-			// const char**
-			IntPtr keysPtrPtr = _AllocKeys(Ptr);
-			if (keysPtrPtr == IntPtr.Zero)
-				return [];
-
-			int nEntries = (int)_Size(Ptr); // The number of narrow strings in the array
-
-			// const char*[]
-			IntPtr[] keysPtrs = new IntPtr[nEntries];
-			Marshal.Copy(keysPtrPtr, keysPtrs, 0, nEntries);
-
-			string[] keys = new string[nEntries];
-
-			int i = 0;
-			foreach(IntPtr keyPtr in keysPtrs) {
-				keys[i] = Marshal.PtrToStringAnsi(keyPtr) ?? string.Empty;
-				++i;
-			}
-
-			Delete2DCharArray(keysPtrPtr);
-			return keys;
-		}
+		public string[] Keys() => GetStringArrayFromConstCharArray(_AllocKeys(Ptr), (int)Size());
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_CommandHandlerGet", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _Get(IntPtr commandHandlerPtr, string name);
