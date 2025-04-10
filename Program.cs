@@ -1,49 +1,10 @@
-﻿using static NikiScript;
+﻿using System.Runtime.InteropServices;
+using static NikiScript;
 
-class Program
+void PrintHandler(IntPtr dataPtr, Level level, string message)
 {
-	static void Echo(IntPtr pCtx)
+	switch (level)
 	{
-		Print(Level.ECHO, "For now we can't use ctx :clown:\n");
-	}
-
-	static void Echo2(IntPtr pCtx)
-	{
-		Print(Level.ECHO, "penes gaming\n");
-	}
-
-	static void Main()
-	{
-		SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
-
-		Command echoCommand = new("echo", 1, 1, Echo, "Echoes the arguments", ["s[text]", "text to print out"]);
-		Command echoCommand2 = new($"{echoCommand.Name}2", echoCommand.MinArgs, echoCommand.MaxArgs, Echo2, echoCommand.Description, echoCommand.ArgsDescriptions);
-		Command echoCommand3 = new("echo", 1, 1, echoCommand.Callback, "Echoes again", ["s[text2]", "text to print out again lol"]);
-
-		CommandHandler commands = new();
-
-		Command echoCommand4 = new(echoCommand.CommandPtr); // IT HAS TO BE DEFINED AFTER THIS BECAUSE THE DELETE FUNCTION IS CALLED AND A NEW POINTER IS SET
-		commands.Add(echoCommand);
-
-		commands.Move(ref echoCommand2);
-
-		if (!commands.Move(ref echoCommand3))
-			Print(Level.ERROR, $"could not create echoCommand3 because command \"{echoCommand4.Name}\" already exists\n");;
-
-		if (!commands.Move(ref echoCommand4))
-			Print(Level.ERROR, $"could not create echoCommand4 because command \"{echoCommand4.Name}\" already exists\n");
-
-		foreach (string command in commands.Keys()) {
-			Print(Level.ECHO, $"Command: {command}\n");
-			commands.Get(command)?.Callback(IntPtr.Zero);
-		}
-
-		commands.Delete();
-	}
-
-	static void PrintHandler(IntPtr dataPtr, Level level, string message)
-	{
-		switch (level) {
 		case Level.DEFAULT:
 			Console.ForegroundColor = ConsoleColor.White;
 			break;
@@ -56,9 +17,28 @@ class Program
 		case Level.ERROR:
 			Console.ForegroundColor = ConsoleColor.Red;
 			break;
-		}
-
-		Console.Write(message);
-		Console.ResetColor();
 	}
+
+	Console.Write(message);
+	Console.ResetColor();
 }
+
+SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
+
+IntPtr allocatedNamePtr = Marshal.StringToHGlobalAnsi("John Doe");
+if (allocatedNamePtr == IntPtr.Zero) {
+	Print(Level.ERROR, "Failed to allocate memory for name\n");
+	return;
+}
+
+ProgramVariable var = new(allocatedNamePtr, "a simple test", ProgramVariable.GetString, ProgramVariable.SetString);
+
+Print(Level.ECHO, $"Var Info:\nDescription: {var.Description}\nValue: {var.Get(IntPtr.Zero, var.Ptr)}\n");
+
+var.Description = "2penes";
+var.Set(IntPtr.Zero, var.Ptr, "Suado Cockboy");
+
+Print(Level.ECHO, $"Var Info:\nDescription: {var.Description}\nValue: {var.Get(IntPtr.Zero, var.Ptr)}\n");
+
+var.Delete();
+Marshal.FreeHGlobal(allocatedNamePtr);
