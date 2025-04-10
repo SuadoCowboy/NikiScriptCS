@@ -36,21 +36,7 @@ void ns_CommandHandlerClear(ns_CommandHandler *pCommandHandler) {
 }
 
 const char** ns_CommandHandlerAllocKeys(ns_CommandHandler *pCommandHandler) {
-	const char **keys = new const char*[pCommandHandler->commands.size()];
-	if (keys == nullptr)
-		return nullptr;
-
-	uint64_t i = 0;
-	for (auto it = pCommandHandler->commands.begin(); it != pCommandHandler->commands.end(); ++it) {
-		keys[i] = it->first.c_str();
-		++i;
-	}
-
-	return keys;
-}
-
-void ns_CommandHandlerFreeKeys(const char **keys) {
-	delete[] keys;
+	return ns::allocUnorderedMapStringKeysToCharArray(pCommandHandler->commands);
 }
 
 uint64_t ns_CommandHandlerSize(ns_CommandHandler *pCommandHandler) {
