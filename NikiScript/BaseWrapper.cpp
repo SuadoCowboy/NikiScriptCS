@@ -8,10 +8,10 @@ char* ns::allocStringToCharString(const std::string& src) {
 	return out;
 }
 
-void ns_freeCharString(char* string) {
+void ns_free2DCharArray(char* string) {
 	delete[] string;
 }
 
-void ns_freeCharArray(const char** keys) {
-	delete[] keys;
+void ns_free2DCharArray(const char** strings) {
+	delete[] strings;
 }

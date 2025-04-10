@@ -55,7 +55,7 @@ public static partial class NikiScript
 				++i;
 			}
 
-			DeleteArrayOfStringPointers(keysPtrPtr);
+			Delete2DCharArray(keysPtrPtr);
 			return keys;
 		}
 

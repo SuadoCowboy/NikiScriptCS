@@ -51,11 +51,11 @@ namespace ns {
 }
 
 extern "C" {
-	NIKIAPI void ns_freeCharString(char* string);
+	NIKIAPI void ns_freeCharArray(char* string);
 
 	/**
 	 * @note does not free the strings inside of it, only the pointers to them
-	 * @param keys
+	 * @param strings
 	 */
-	NIKIAPI void ns_freeCharArray(const char** keys);
+	NIKIAPI void ns_free2DCharArray(const char** strings);
 }
