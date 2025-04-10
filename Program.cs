@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using static NikiScript;
 
-void PrintHandler(IntPtr dataPtr, Level level, string message)
+static void PrintHandler(IntPtr dataPtr, Level level, string message)
 {
 	switch (level)
 	{
@@ -25,20 +25,23 @@ void PrintHandler(IntPtr dataPtr, Level level, string message)
 
 SetPrintCallback(IntPtr.Zero, new CallbackDelegate(PrintHandler));
 
-IntPtr allocatedNamePtr = Marshal.StringToHGlobalAnsi("John Doe");
-if (allocatedNamePtr == IntPtr.Zero) {
-	Print(Level.ERROR, "Failed to allocate memory for name\n");
-	return;
-}
+ProgramVariables variables = new();
 
-ProgramVariable var = new(allocatedNamePtr, "a simple test", ProgramVariable.GetString, ProgramVariable.SetString);
+variables.Add("name", new("John Doe", "User nickname", ProgramVariable.GetString, ProgramVariable.SetString));
 
-Print(Level.ECHO, $"Var Info:\nDescription: {var.Description}\nValue: {var.Get(IntPtr.Zero, var.Ptr)}\n");
+variables.Add("penes", new("3penes", "2penes", ProgramVariable.GetString, ProgramVariable.SetString));
 
-var.Description = "2penes";
+Print(Level.ECHO, $"{variables.Size()}\n");
+foreach (string key in variables.Keys())
+	Print(Level.ECHO, $"{key}\n");
+
+ProgramVariable var = variables.Get("penes")?? throw new Exception("Failed to get variable 'penes'");
+
+Print(Level.ECHO, $"Var \"penes\" info:\n- Description: {var.Description}\n- Value: {var.Get(IntPtr.Zero, var.Ptr)}\n");
+
+var.Description = "7penesss";
 var.Set(IntPtr.Zero, var.Ptr, "Suado Cockboy");
 
-Print(Level.ECHO, $"Var Info:\nDescription: {var.Description}\nValue: {var.Get(IntPtr.Zero, var.Ptr)}\n");
+Print(Level.ECHO, $"Var \"penes\" info:\n- Description: {var.Description}\n- Value: {var.Get(IntPtr.Zero, var.Ptr)}\n");
 
-var.Delete();
-Marshal.FreeHGlobal(allocatedNamePtr);
+variables.Delete();

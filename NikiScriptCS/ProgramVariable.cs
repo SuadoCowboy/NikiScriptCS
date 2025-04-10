@@ -24,6 +24,10 @@ public static partial class NikiScript {
 		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 		public delegate void SetValueDelegate(IntPtr ctxPtr, IntPtr varPtr, string value);
 
+		/// <summary>
+		/// In case the pointer was allocated by the C# code, we need to free it when the variable is deleted.
+		/// </summary>
+		private IntPtr AllocatedValuePtr = IntPtr.Zero;
 
 		public IntPtr Ptr { get; private set; }
 		public IntPtr ValuePtr {
@@ -54,6 +58,16 @@ public static partial class NikiScript {
 			Ptr = _New(valuePtr, description, get, set);
 		}
 
+		// TODO: how will this work in C#?
+		public ProgramVariable(string valueToAlloc, string description, GetValueDelegate get, SetValueDelegate set)
+		{
+			IntPtr allocatedValuePtr = Marshal.StringToHGlobalAnsi(valueToAlloc);
+			if (allocatedValuePtr == IntPtr.Zero)
+				throw new Exception("Failed to allocate memory for value");
+
+			Ptr = _New(allocatedValuePtr, description, get, set);
+		}
+
 		public ProgramVariable(IntPtr ptr)
 		{
 			Ptr = ptr;
@@ -64,10 +78,15 @@ public static partial class NikiScript {
 
 		public void Delete()
 		{
-			if (Ptr == IntPtr.Zero)
-				return;
-			_Delete(Ptr);
-			Ptr = IntPtr.Zero;
+			if (Ptr != IntPtr.Zero) {
+				_Delete(Ptr);
+				Ptr = IntPtr.Zero;
+			}
+
+			if (AllocatedValuePtr != IntPtr.Zero) {
+				Marshal.FreeHGlobal(AllocatedValuePtr);
+				AllocatedValuePtr = IntPtr.Zero;
+			}
 		}
 
 		[DllImport("libNikiScript.dll", EntryPoint = "ns_ProgramVariableGetValue", CallingConvention = CallingConvention.Cdecl)]
